@@ -1,5 +1,6 @@
 const notes = require("../db/db");
 
+
 module.exports = function(app) {
 
     // grabs info from the db.json file
