@@ -1,12 +1,15 @@
 // tells node that we are creating an "express" server
 const express = require("express");
 
+// telling node we are using express 
+const app = express();
+
 // sets up the Express app to handle data parsing
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// telling node we are using express 
-const app = express();
+
+
 
 // sets the port either default or 8080
 const PORT = process.env.PORT || 8080;
