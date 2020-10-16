@@ -1,4 +1,3 @@
-const fs = require("fs");
 const notes = require("../db/db");
 
 module.exports = function(app) {
@@ -6,7 +5,7 @@ module.exports = function(app) {
     // grabs info from the db.json file
     app.get("/api/notes", function(req, res) {
         const notes = JSON.parse(data);
-        res.json(notes);
+        return res.json(notes);
     });
 
 
@@ -19,7 +18,7 @@ module.exports = function(app) {
 
     app.delete("/api/notes/:id", function(req, res) {
         // grabs selected id to be deleted
-        var deleteID = req.params.id
+        const deleteID = req.params.id
 
         // Filter to find only the selected id
         for (var i = 0; i < deleteID.length; i++) {
