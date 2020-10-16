@@ -1,12 +1,16 @@
-const notes = require("../db/db");
-
+// const notes = require("../db/db");
+// file system library for Node
+const fs = require("fs");
 
 module.exports = function(app) {
 
     // grabs info from the db.json file
     app.get("/api/notes", function(req, res) {
-        const notes = JSON.parse(data);
-        return res.json(notes);
+        fs.readFile(__dirname + "/../db/db.json", (err, data) => { // using this because node Node isn’t expecting as .json file
+            if (err) throw err;
+            const notes = JSON.parse(data);
+            return res.json(notes);
+        });
     });
 
 
