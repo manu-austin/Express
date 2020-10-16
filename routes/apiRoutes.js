@@ -12,13 +12,22 @@ module.exports = function(app) {
 
     // adds info to db.json file
     app.post("/api/notes", function(req, res) {
-        tableData.push(req.body);
-        res.json(notes);
+        var newTask = req.body;
+        notes.push(req.body);
+        res.json(newTask);
     });
 
     app.delete("/api/notes/:id", function(req, res) {
+        // grabs selected id to be deleted
+        var deleteID = req.params.id
 
+        // Filter to find only the selected id
+        for (var i = 0; i < deleteID.length; i++) {
+            if (chosen === deleteID[i].routeName) {
+                //needs to be replaced by delete return res.json(characters[i]);
+            }
+        }
+        // message if no id found
+        return res.send("No task found");
     });
-
-
 }
