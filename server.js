@@ -1,17 +1,34 @@
+// tells node that we are creating an "express" server
 const express = require("express");
-const apiRoutes = require("./routes/apiRoutes");
-const htmlRoutes = require("./routes/htmlRoutes");
 
-// Initialize the app and create a port
-const app = express();
-const PORT = process.env.PORT || 3000;
-
-// Set up body parsing, static, and route middleware
-app.use(express.json());
+// sets up the Express app to handle data parsing
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static("public"));
-app.use("/api", apiRoutes);
-app.use("/", htmlRoutes);
+app.use(express.json());
 
-// Start the server on the port
-app.listen(PORT, () => console.log(`Listening on PORT: ${PORT}`));
+// telling node we are using express 
+const app = express();
+
+// sets the port either default or 8080
+const PORT = process.env.PORT || 8080;
+
+// ================================================================================
+// ROUTER
+// points our server to a series of "route" files.
+// these routes give our server a "map" of how to respond when users visit or request data from various URLs.
+// ================================================================================
+
+require("./routes/apiRoutes")(app);
+require("./routes/htmlRoutes")(app);
+
+// use public folder
+app.use(express.static(__dirname + "public"));
+
+
+// =============================================================================
+// LISTENER
+// The below code effectively "starts" our server
+// =============================================================================
+
+app.listen(PORT, function() {
+    console.log("App listening on PORT: " + PORT);
+});
