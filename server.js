@@ -1,5 +1,6 @@
 // tells node that we are creating an "express" server
 const express = require("express");
+const path = require("path");
 
 // telling node we are using express 
 const app = express();
@@ -8,6 +9,8 @@ const app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+// use public folder
+app.use(express.static(path.join(__dirname, "public")));
 
 // sets the port either default or 8080
 const PORT = process.env.PORT || 8080;
@@ -21,8 +24,7 @@ const PORT = process.env.PORT || 8080;
 require("./routes/apiRoutes")(app);
 require("./routes/htmlRoutes")(app);
 
-// use public folder
-app.use(express.static(__dirname + "public"));
+
 
 
 // =============================================================================
